@@ -1,9 +1,10 @@
+import fs from "node:fs";
+import path from "node:path";
+
 import type { FSWatcher } from "chokidar";
 import chokidar from "chokidar";
 import { ESLint } from "eslint";
-import fs from "fs";
 import { imageSizeFromFile } from "image-size/fromFile";
-import path from "path";
 import * as prettier from "prettier";
 import type { HmrContext, Plugin, ResolvedConfig, ViteDevServer } from "vite";
 import { z } from "zod";

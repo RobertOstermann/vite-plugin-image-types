@@ -4,7 +4,7 @@
     "url": "https://github.com/RobertOstermann"
   },
   "name": "vite-plugin-image-types",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "license": "MIT",
   "homepage": "https://github.com/RobertOstermann/vite-plugin-image-types",
   "repository": {
@@ -29,7 +29,8 @@
     "build": "smartbundle",
     "ts:check": "tsc --skipLibCheck",
     "lint": "eslint src",
-    "format": "eslint src --fix"
+    "format": "eslint src --fix",
+    "publish": "npm run build && cd dist && npm publish"
   },
   "dependencies": {
     "chokidar": "^4.0.3",
