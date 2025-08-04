@@ -1,0 +1,40 @@
+##################################################
+#################### general #####################
+##################################################
+./vscode
+./vs
+package-lock.json
+
+.vscode/command_variables.json
+
+##################################################
+##################### client #####################
+##################################################
+
+# dependencies
+node_modules
+node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# production
+build
+dist
+
+# environment
+.env.development
+*.local
+
+# misc
+.DS_Store
+.vs
+public/.DS_Store
+
+client/dev-dist
+npm-debug.log*
+package-lock.json
+yarn-debug.log*
+yarn-error.log*
