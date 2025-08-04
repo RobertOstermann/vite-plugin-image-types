@@ -11,7 +11,7 @@ This [vite](https://vitejs.dev/) plugin generates a type file for the image path
 
 ## Features
 
-- 🔥 Generate image types as part of the development process
+🔥 Generate image types as part of the development process
 
 ## Installation
 

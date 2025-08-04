@@ -14,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/RobertOstermann/vite-plugin-image-types/issues"
   },
-  "private": false,
+  "private": true,
   "type": "module",
   "exports": "./src/index.ts",
   "keywords": [
