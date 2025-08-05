@@ -325,7 +325,7 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
               const relativePath = path.posix.join("/", path.relative(publicDir, filePath));
               try {
                 const dimensions = await imageSizeFromFile(filePath);
-                return `'${relativePath}': {\ntitle: '${title}',\npath: '${relativePath}',\naspectRatio: '${dimensions.width} / ${dimensions.height}'\n}`;
+                return `'${relativePath}': {\ntitle: '${title}',\npath: '${relativePath}',\naspectRatio: '${dimensions.width}/${dimensions.height}'\n}`;
               } catch (error) {
                 console.warn(
                   `Warning: Could not get dimensions for ${filePath}:`,
