@@ -4,7 +4,7 @@
     "url": "https://github.com/RobertOstermann"
   },
   "name": "vite-plugin-image-types",
-  "version": "1.5.0",
+  "version": "1.5.2",
   "license": "MIT",
   "homepage": "https://github.com/RobertOstermann/vite-plugin-image-types",
   "repository": {
@@ -33,29 +33,28 @@
     "publish": "npm run build && cd dist && npm publish"
   },
   "dependencies": {
-    "chokidar": "^4.0.3",
+    "chokidar": "^5.0.0",
     "eslint": "9.32.0",
     "image-size": "2.0.2",
-    "prettier": "3.6.2",
-    "zod": "4.0.14"
+    "prettier": "3.8.1",
+    "zod": "4.3.6"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "5.2.2",
-    "@types/node": "22.17.0",
+    "@stylistic/eslint-plugin": "5.9.0",
+    "@types/node": "24.6.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-import-newlines": "1.4.0",
     "eslint-plugin-no-relative-import-paths": "^1.6.1",
-    "eslint-plugin-prettier": "5.5.3",
+    "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "eslint-plugin-tsdoc": "0.4.0",
-    "eslint-plugin-unused-imports": "4.1.4",
+    "eslint-plugin-tsdoc": "0.5.2",
+    "eslint-plugin-unused-imports": "4.4.1",
     "smartbundle": "^0.14.1",
-    "typescript": "5.8.3",
-    "typescript-eslint": "8.38.0",
-    "vite": "7.0.6",
-    "vitest": "3.2.4"
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.56.1",
+    "vite": "7.3.1"
   },
   "peerDependencies": {
     "vite": "^5 || ^6 || ^7"

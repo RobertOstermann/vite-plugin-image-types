@@ -18,10 +18,6 @@ This [vite](https://vitejs.dev/) plugin generates a type file for the image path
 ```bash
 # using npm
 npm install -D vite-plugin-image-types
-# using pnpm
-pnpm install -D vite-plugin-image-types
-# using yarn
-yarn add --dev vite-plugin-image-types
 ```
 
 ## Usage
@@ -100,7 +96,7 @@ To publish a new version of this package to npm, follow these steps:
 
 3. **Publish to npm**:
    ```bash
-   npm publish
+   npm run publish
    ```
 
 > **Note:** Make sure you have the necessary permissions to publish to the `vite-plugin-image-types` package on npm.
