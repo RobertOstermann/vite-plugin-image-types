@@ -311,7 +311,7 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
       generatedCode = `export type ${imagePathName} = ${imageFiles
         .map((file) => {
           const filePath = file.path;
-          const relativePath = path.posix.join("/", path.relative(publicDir, filePath));
+          const relativePath = path.posix.join("/", path.posix.relative(publicDir, filePath));
           return `'${relativePath}'`;
         })
         .join(" | ")}\n`;
@@ -322,7 +322,7 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
             imageFiles.map(async (file) => {
               const title = file.file;
               const filePath = file.path;
-              const relativePath = path.posix.join("/", path.relative(publicDir, filePath));
+              const relativePath = path.posix.join("/", path.posix.relative(publicDir, filePath));
               try {
                 const dimensions = await imageSizeFromFile(filePath);
                 return `'${relativePath}': {\ntitle: '${title}',\npath: '${relativePath}',\naspectRatio: '${dimensions.width}/${dimensions.height}'\n}`;

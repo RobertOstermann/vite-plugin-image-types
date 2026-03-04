@@ -29,19 +29,17 @@ yarn add --dev vite-plugin-image-types
 **Vite config**
 
 ```ts
-import { imageTypes } from 'vite-plugin-image-types';
+import { imageTypes } from "vite-plugin-image-types";
 
 export default defineConfig({
-  plugins: [
-    imageTypes(),
-  ],
+  plugins: [imageTypes()],
 });
 ```
 
 ## Options
 
 | Name                     | Type                                          | Description                                                                              | Default                                                                                |
-|------------------------  |-----------------------------------------------|------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------- |
+| ------------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `imageDir`               | `string`                                      | The relative directory (from the public directory) to search for image files.            | `""`                                                                                   |
 | `outputFile`             | `string`                                      | Path to the generated TypeScript file containing image types.                            | `"src/types/ImagePaths.ts"`                                                            |
 | `imagePathName`          | `string`                                      | The name of the generated string union type representing all image paths.                | `"ImagePath"`                                                                          |
@@ -78,3 +76,31 @@ const ImageFiles: Record<ImagePath, ImageFile> = {
 
 export { ImageFiles };
 ```
+
+## Publishing to npm
+
+To publish a new version of this package to npm, follow these steps:
+
+1. **Login to npm** (if not already logged in):
+
+   ```bash
+   npm login
+   ```
+
+2. **Bump the version** according to [semver](https://semver.org/):
+
+   ```bash
+   # patch release (bug fixes)
+   npm version patch
+   # minor release (new features, backwards compatible)
+   npm version minor
+   # major release (breaking changes)
+   npm version major
+   ```
+
+3. **Publish to npm**:
+   ```bash
+   npm publish
+   ```
+
+> **Note:** Make sure you have the necessary permissions to publish to the `vite-plugin-image-types` package on npm.
