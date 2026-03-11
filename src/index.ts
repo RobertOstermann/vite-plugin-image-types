@@ -11,6 +11,8 @@ import { z } from "zod";
 
 const PLUGIN_NAME = "vite-plugin-image-types";
 
+const normalizePath = (path: string) => path.replaceAll("\\", "/");
+
 interface ImageFile {
   path: string;
   file: string;
@@ -124,7 +126,7 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
     throw new Error("❌ Invalid plugin options");
   }
 
-  const parsedOptions = OptionsSchema.parse(options);
+  const parsedOptions = result.data;
 
   const {
     imageDir,
@@ -180,13 +182,13 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
     try {
       const directory = fs.readdirSync(dir);
       directory.forEach((file) => {
-        const filePath = path.join(dir, file);
+        const filePath = path.posix.join(dir, file);
         const stat = fs.statSync(filePath);
         if (stat && stat.isDirectory()) {
           // Exclude specified directories
           if (excludeDirs.length > 0) {
-            const excludePattern = new RegExp(excludeDirs.join("|"));
-            if (!excludePattern.test(file)) {
+            const excludePattern = new RegExp(`^(${excludeDirs.join("|")})$`);
+            if (!excludePattern.test(normalizePath(file))) {
               results = results.concat(getImageFiles(filePath));
             }
           } else {
@@ -226,7 +228,7 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
   const setupWatcher = () => {
     if (!isDev || watchMode === "vite") return;
 
-    const fullImageDir = imageDir ? path.join(publicDir, imageDir) : publicDir;
+    const fullImageDir = imageDir ? path.posix.join(publicDir, imageDir) : publicDir;
 
     if (!fs.existsSync(fullImageDir)) {
       log.warn(`Image directory does not exist. File watcher not started.`);
@@ -236,8 +238,8 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
     // Create watcher for the image directory
     watcher = chokidar.watch(fullImageDir, {
       ignored: (filePath: string) => {
-        const relativePath = path.relative(fullImageDir, filePath);
-        const segments = relativePath.split(path.sep);
+        const relativePath = path.posix.relative(fullImageDir, filePath);
+        const segments = relativePath.split(path.posix.sep);
 
         // Ignore excluded directories
         if (segments.some((segment) => excludeDirs.includes(segment))) {
@@ -278,8 +280,8 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
 
   // Generate the TypeScript definitions
   const generateTypes = async (): Promise<void> => {
-    const fullImageDir = imageDir ? path.join(publicDir, imageDir) : publicDir;
-    const fullOutputFile = path.join(root, outputFile);
+    const fullImageDir = imageDir ? path.posix.join(publicDir, imageDir) : publicDir;
+    const fullOutputFile = path.posix.join(root, outputFile);
 
     // Ensure the image directory exists
     if (!fs.existsSync(fullImageDir)) {
@@ -288,7 +290,7 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
     }
 
     // Ensure output directory exists
-    const outputDir = path.dirname(fullOutputFile);
+    const outputDir = path.posix.dirname(fullOutputFile);
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
@@ -345,7 +347,7 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
       let formattedCode = generatedCode;
 
       if (prettierFormat) {
-        const prettierConfig = await prettier.resolveConfig(path.join(fullOutputFile));
+        const prettierConfig = await prettier.resolveConfig(fullOutputFile);
         formattedCode = await prettier.format(formattedCode, {
           parser: "typescript",
           ...prettierConfig,
@@ -373,8 +375,8 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
   return {
     name: PLUGIN_NAME,
     configResolved(config: ResolvedConfig) {
-      root = config.root;
-      publicDir = config.publicDir ? config.publicDir : "";
+      root = normalizePath(config.root);
+      publicDir = config.publicDir ? normalizePath(config.publicDir) : "";
       isDev = config.command === "serve";
     },
     async buildStart() {
@@ -390,11 +392,14 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
       // Only use Vite's HMR in 'vite' or 'hybrid' mode
       if (!isDev || watchMode === "chokidar") return;
 
-      const fullImageDir = imageDir ? path.join(publicDir, imageDir) : publicDir;
+      const normalizedFile = normalizePath(file);
+      const fullImageDir = imageDir ? path.posix.join(publicDir, imageDir) : publicDir;
 
       // Check if the changed file is in our image directory
-      if (file.startsWith(fullImageDir)) {
-        const isImageFile = fileExtensions.some((ext) => file.toLowerCase().endsWith(ext));
+      if (normalizedFile.startsWith(fullImageDir)) {
+        const isImageFile = fileExtensions.some((ext) =>
+          normalizedFile.toLowerCase().endsWith(ext),
+        );
 
         if (isImageFile) {
           await debouncedRegenerate("Image file changed (via Vite HMR)");
