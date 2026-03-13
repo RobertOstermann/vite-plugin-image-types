@@ -367,8 +367,8 @@ function imageTypes(options: Partial<Options> = {}): Plugin {
       fs.writeFileSync(fullOutputFile, formattedCode);
 
       log.success(`Types generated`);
-    } catch {
-      log.error("Error generating image types");
+    } catch (error) {
+      log.error("Error generating image types", error);
     }
   };
 

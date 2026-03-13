@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.5] - 2026-03-13
+
+- Include error message
+
 ## [1.5.4] - 2026-03-13
 
 - Allow Vite 8
