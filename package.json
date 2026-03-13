@@ -4,7 +4,7 @@
     "url": "https://github.com/RobertOstermann"
   },
   "name": "vite-plugin-image-types",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "license": "MIT",
   "homepage": "https://github.com/RobertOstermann/vite-plugin-image-types",
   "repository": {
@@ -57,6 +57,6 @@
     "vite": "7.3.1"
   },
   "peerDependencies": {
-    "vite": "^5 || ^6 || ^7"
+    "vite": ">=5"
   }
 }

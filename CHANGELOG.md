@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.5.3] - 2026-03-03
+## [1.5.4] - 2026-03-13
+
+- Allow Vite 8
+
+## [1.5.3] - 2026-03-12
 
 - Attempt to fix Windows issues
 
